@@ -86,7 +86,7 @@ const products = [
   }
 ];
   const showLabel = false;
-  const minPrice = 101;
+  const minPrice = 102;
   const onClickButton = (e) => {
     console.log(name);
   };
