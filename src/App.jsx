@@ -110,6 +110,7 @@ function App() {
           />
         );
       })}
+      {/* <ChangeName/> */}
     </div>
   );
 }
