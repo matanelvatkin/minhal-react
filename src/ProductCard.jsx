@@ -4,9 +4,33 @@ import Paragraph from "./Paragraph";
 import Button from "./Button";
 
 function ProductCard(props) {
-  const [number, setNumber] = useState(0);
-  const onClickButton = (e) => {
-    console.log(props.product);
+  const [number, setNumber] = useState(
+    props.cart[props.product.name] ? props.cart[props.product.name].sum : 0
+  );
+  const onClickButtonPlus = (e) => {
+    props.setCart((prev) => {
+      return {
+        ...prev,
+        [props.product.name]: { ...props.product, sum: number + 1 },
+      };
+    });
+    setNumber(number + 1);
+  };
+  const onClickButtonMinus = (e) => {
+    if (props.cart[props.product.name].sum > 1) {
+      props.setCart((prev) => {
+        return {
+          ...prev,
+          [props.product.name]: { ...props.product, sum: number - 1 },
+        };
+      });
+      setNumber(number - 1);
+    } else {
+      const newCart = { ...props.cart };
+      delete newCart[props.product.name];
+      props.setCart(newCart);
+      setNumber(0);
+    }
   };
   return (
     <div className="form">
@@ -15,25 +39,21 @@ function ProductCard(props) {
       <Paragraph p={"price: " + props.price + "₪"} />
       <Button
         text={"+"}
-        onClick={()=>{
-          setNumber(number+1)
-        }}
+        onClick={onClickButtonPlus}
         // setNumber={() => {
         //   setNumber(number + 1);
         // }}
         // update={setNumber}
         value="+"
       />
-      {number}
+      {props.cart[props.product.name] ? props.cart[props.product.name].sum : 0}
       <Button
         text={"-"}
         // setNumber={() => {
         //   if (number > 0) setNumber(number - 1);
         // }}
         // update={setNumber}
-        onClick={()=>{
-          setNumber(number-1)
-        }}
+        onClick={onClickButtonMinus}
         value="-"
       />
     </div>
