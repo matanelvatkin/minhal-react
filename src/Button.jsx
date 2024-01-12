@@ -7,7 +7,7 @@ function Button(props) {
     <button onClick={(e)=>{
       // props.setNumber()
       // props.update(prev=>props.value==='+'?prev+1:prev-1)
-      props.onClick()
+      props.onClick(e)
     }}>{props.text}</button>
   )
 }
