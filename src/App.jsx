@@ -16,9 +16,12 @@ function App() {
   return (
     <div className="app">
       <Title text={"store"} />
+      <div className="layout">
       <ProductsList products={products} setCart={setCart} cart={cart} />
       <Cart cart={cart} setCart={setCart} />
+      </div>
     </div>
+    // <Layout/>
   );
 }
 

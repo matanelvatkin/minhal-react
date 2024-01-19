@@ -4,7 +4,7 @@ import ProductCard from "./ProductCard";
 export default function ProductsList({products,setCart,cart}) {
 
   return (
-    <div style={{width:"100%"}}>
+    <div className="productList">
       {products.map((product, index, array) => {
         return (
           <ProductCard

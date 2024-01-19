@@ -7,6 +7,9 @@ function ProductCard(props) {
   const [number, setNumber] = useState(
     props.cart[props.product.name] ? props.cart[props.product.name].sum : 0
   );
+  const [style, setStyle] = useState(
+    true
+  );
   const onClickButtonPlus = (e) => {
     props.setCart((prev) => {
       return {
@@ -15,6 +18,7 @@ function ProductCard(props) {
       };
     });
     setNumber(number + 1);
+    setStyle(true)
   };
   const onClickButtonMinus = (e) => {
     if (props.cart[props.product.name].sum > 1) {
@@ -25,6 +29,7 @@ function ProductCard(props) {
         };
       });
       setNumber(number - 1);
+    setStyle(false)
     } else {
       const newCart = { ...props.cart };
       delete newCart[props.product.name];
@@ -33,7 +38,7 @@ function ProductCard(props) {
     }
   };
   return (
-    <div className="form">
+    <div className={`form ${!style&&'darkForm'}`}  >
       <Title text={props.product.name} />
       <Paragraph p={"brand: " + props.brand} />
       <Paragraph p={"price: " + props.price + "₪"} />
