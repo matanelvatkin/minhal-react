@@ -8,7 +8,7 @@ function Button(props) {
       // props.setNumber()
       // props.update(prev=>props.value==='+'?prev+1:prev-1)
       props.onClick(e)
-    }}>{props.text}</button>
+    }} className='button'>{props.text}</button>
   )
 }
 
