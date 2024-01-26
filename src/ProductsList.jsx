@@ -1,7 +1,7 @@
 import React from "react";
 import ProductCard from "./ProductCard";
 
-export default function ProductsList({products,setCart,cart}) {
+export default function ProductsList({products}) {
 
   return (
     <div className="productList">
@@ -12,8 +12,6 @@ export default function ProductsList({products,setCart,cart}) {
             title={product.name}
             price={product.price}
             brand={product.brand}
-            setCart={setCart}
-            cart={cart}
           />
         );
       })}

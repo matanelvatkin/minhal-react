@@ -2,16 +2,19 @@ import React, { useState } from "react";
 import Title from "./Title";
 import Paragraph from "./Paragraph";
 import Button from "./Button";
+import { useContext } from "react";
+import { cartContext } from "./App";
 
 function ProductCard(props) {
+  const {cart,setCart} =useContext(cartContext)
   const [number, setNumber] = useState(
-    props.cart[props.product.name] ? props.cart[props.product.name].sum : 0
+    cart[props.product.name] ? cart[props.product.name].sum : 0
   );
   const [style, setStyle] = useState(
     true
   );
   const onClickButtonPlus = (e) => {
-    props.setCart((prev) => {
+    setCart((prev) => {
       return {
         ...prev,
         [props.product.name]: { ...props.product, sum: number + 1 },
@@ -21,8 +24,8 @@ function ProductCard(props) {
     setStyle(true)
   };
   const onClickButtonMinus = (e) => {
-    if (props.cart[props.product.name].sum > 1) {
-      props.setCart((prev) => {
+    if (cart[props.product.name].sum > 1) {
+      setCart((prev) => {
         return {
           ...prev,
           [props.product.name]: { ...props.product, sum: number - 1 },
@@ -31,9 +34,9 @@ function ProductCard(props) {
       setNumber(number - 1);
     setStyle(false)
     } else {
-      const newCart = { ...props.cart };
+      const newCart = { ...cart };
       delete newCart[props.product.name];
-      props.setCart(newCart);
+      setCart(newCart);
       setNumber(0);
     }
   };
@@ -51,7 +54,7 @@ function ProductCard(props) {
         // update={setNumber}
         value="+"
       />
-      {props.cart[props.product.name] ? props.cart[props.product.name].sum : 0}
+      {cart[props.product.name] ? cart[props.product.name].sum : 0}
       <Button
         text={"-"}
         // setNumber={() => {

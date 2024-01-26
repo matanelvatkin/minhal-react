@@ -80,3 +80,11 @@ export const Products = [
     price: 1500,
   },
 ];
+
+export const users = [
+  { name: "John", password: "pass123", age: 25, gender: "male", cart: {} },
+  { name: "Alice", password: "securePass", age: 30, gender: "female", cart: {}},
+  { name: "Bob", password: "bobPassword", age: 22, gender: "male", cart: {}},
+  { name: "Eve", password: "evePass", age: 28, gender: "female", cart:{} },
+  { name: "Charlie", password: "charlie123", age: 35, gender: "non-binary", cart: {}}
+];
