@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import ProductCard from "./ProductCard";
 import Title from "./Title";
 import Button from "./Button";
@@ -16,8 +16,23 @@ function App() {
   const [products, setProducts] = useState(Products);
   const [cart, setCart] = useState({});
   const [user, setUser] = useState();
-  //App name => ProductCard props.title => Title props.text (97)
-  //App => Title props.text (92)
+
+  useEffect(()=>{
+    // setItem('{userName}',value=user.cart)
+    if(user&&!JSON.parse(localStorage.getItem(user.name))){
+      localStorage.setItem(user.name,JSON.stringify(user.cart))
+    }
+    else if(user&&localStorage.getItem(user.name)&&user.cart!=cart){
+      setCart(JSON.parse(localStorage.getItem(user.name)))
+    }
+  },[user])
+
+  useEffect(()=>{
+    if(user){
+      localStorage.setItem(user.name,JSON.stringify(cart))
+      setUser({...user,cart:cart})
+    }
+  },[cart])
   return (
     <>
       {user ? (
@@ -29,6 +44,7 @@ function App() {
                 <ProductsList products={products} />
                 <Cart />
               </div>
+              <Button text="logout" onClick={()=>setUser()}/>
             </div>
           </cartContext.Provider>
         </userContext.Provider>

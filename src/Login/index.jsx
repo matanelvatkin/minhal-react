@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Button from "../Button";
 import { users } from "../assets/data";
 
-export default function Login({ setUser }) {
+export default function Login({ setUser,...props }) {
   const [inputValue, setInputValue] = useState();
   const checkData = () => {
     const res = users.find(function (user,index,array) {
